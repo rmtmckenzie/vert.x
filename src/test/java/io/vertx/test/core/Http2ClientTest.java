@@ -758,7 +758,7 @@ public class Http2ClientTest extends Http2TestBase {
   public void testClientResetServerStreamDuringResponse() throws Exception {
     server.requestHandler(req -> {
       req.exceptionHandler(err -> {
-        assertTrue(err instanceof StreamResetException);
+        assertEquals(err.getClass(), StreamResetException.class);
       });
       AtomicReference<StreamResetException> reset = new AtomicReference<>();
       req.response().exceptionHandler(err -> {
